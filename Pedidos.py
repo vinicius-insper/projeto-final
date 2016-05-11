@@ -14,5 +14,5 @@ class Pedido():
         return x 
         
 teste = Pedido(1,1,1,1)
-y = teste.registrar_pedido('00')
+y = teste.buscar_codigo_nuvem('00')
 print (y)
