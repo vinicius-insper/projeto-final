@@ -1,5 +1,6 @@
-import tkinter as tk
-
+import tkinter as tk 
+from Pedidos import Pedido
+from firebase import firebase
 
 class Mapa:
     def __init__(self):
@@ -638,6 +639,7 @@ class Mapa:
         self.b0.grid(row=4,column=1)
         
         self.bok=tk.Button(self.teclado)
+        self.bok.configure(command=lambda:self.ok())
         self.bok.configure(text='OK')
         self.bok.configure(width=14,height=6)
         self.bok.configure(bg='green')
@@ -697,10 +699,24 @@ class Mapa:
     def cancela(self):
         self.string='' 
         self.codigo.configure(text=self.string)
+        
+    def ok(self):
+        x = Pedido.buscar_codigo_nuvem(self, self.string)  
+        print(x)
+        self.string='' 
+        self.codigo.configure(text=self.string)        
+        return x
+        
+    
+                
+
+class mesa:
+    def __init__(self,numero):
+        self.numero=numero
+    
+  #  def registrar_pedido(self,mesa):
+        
 
 
-class cozinha:
-    def __init__(self,mesa):
-        self.mesa=mesa
-                 
 mapa=Mapa() 
+
