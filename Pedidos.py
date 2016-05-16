@@ -1,18 +1,16 @@
+from BancodeDados import cMenu
 from firebase import firebase
-firebase = firebase.FirebaseApplication('https://smartserver.firebaseio.com')
+codigos = cMenu()
+firebase = firebase.FirebaseApplication('https://smartserver.firebaseio.com/')
+class cPedido():
 
-class Pedido():
-
-    def __init__(self, mesa, cadeira, hora, estado):
-        self.mesa = mesa
-        self.cadeira = cadeira
-        self.hora = hora
-        self.estado = estado
+    def __init__(self, nMesa, nCadeira):
+        self.mesa = nMesa
+        self.cadeira = nCadeira
+        self.novo_pedido = 0
         
-    def buscar_codigo_nuvem(self, codigo):
-        x = firebase.get(url = '/Menu/', name= codigo)
-        return x 
-        
-teste = Pedido(1,1,1,1)
-y = teste.buscar_codigo_nuvem('00')
-print (y)
+    def buscar_e_colocar_codigo_FB(self, string):
+    	for i in codigos.lista_codigos:
+    		if i == string:
+    			z = codigos.menu_codigos[string]
+    			firebase.put(url = 'mesa{0}/'.format(self.mesa), name = 'cadeira{0}'.format(self.cadeira), data = z)
