@@ -1,16 +1,57 @@
 import tkinter as tk
 from Pedidos import cPedido
 
+class cInicio:
+    def __init__(self):
+        self.window=tk.Tk()
+        self.window.title ('Inicio')
+
+    def iniciar(self):
+        self.frame = tk.Frame(self.window, width=500, height=500, bd=175)
+        self.frame.pack()
+        
+        self.botaomapa = tk.Button(self.frame,text ='Mapa',height=8 ,width= 20 ,bd=20,padx=20)
+        self.botaomapa.pack(side=tk.LEFT)
+        self.botaomapa.configure(command = mesa.iniciar)
+        
+        self.botaocozinha = tk.Button(self.frame,text ='Cozinha',height=8 ,width=20 ,bd=20,padx=20)
+        self.botaocozinha.pack(side=tk.RIGHT)
+        self.botaocozinha.configure(command = cozinha.iniciar)
+
+        self.window.mainloop()
+
+class cCozinha:
+    def __init__(self):
+        self.variavel = 1
+
+    def iniciar(self):
+        self.cozinha = tk.Tk()
+        self.cozinha.title("Cozinha")
+
+        self.label1=tk.Label(self.cozinha)
+        self.label1.configure(width=49,height=8, text='Para Fazer', bg='red')
+        self.label1.grid(row=0,column=0)
+        
+        self.label2=tk.Label(self.cozinha)
+        self.label2.configure(width=49,height=8, text='Fazendo', bg='yellow')
+        self.label2.grid(row=0,column=1)
+        
+        self.label3=tk.Label(self.cozinha)
+        self.label3.configure(width=49,height=8, text='Pronto', bg='green')
+        self.label3.grid(row=0,column=2)
+
+        self.cozinha.mainloop()
+
 class cMesa:
     def __init__(self):
+        self.nMesa = 'x'
+        
+    def iniciar(self):
         self.string=''
         self.mapa= tk.Tk()
         self.mapa.title('Mapa Restaurante') 
         self.mapa.configure(bg='green')
 
-        self.nMesa = 'x'
-        
-    def iniciar(self):
         self.mesa1=tk.Button(self.mapa)
         self.mesa1.configure(command= lambda: self.callback_mesa(1), text='mesa 1', width= 14, height= 6, bg='yellow')   
         self.mesa1.grid(row=0,column=0)
@@ -217,4 +258,6 @@ class cTeclado:
 cadeira = cCadeira()
 teclado = cTeclado()
 mesa = cMesa()
-mesa.iniciar()
+cozinha = cCozinha()
+inicio = cInicio()
+inicio.iniciar()
