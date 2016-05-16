@@ -1,4 +1,4 @@
-class Menu:
+class cMenu:
 	def __init__(self):
 		self.menu_codigos = {}
 		self.menu_codigos['000'] = {'Coca Cola': 3.50}
@@ -18,10 +18,4 @@ class Menu:
 		self.menu_codigos['014'] = {'Salada': 1.50}
 		self.menu_codigos['015'] = {'MilkShake': 5.50}
 
-
-from firebase import firebase
-menu = Menu()
-firebase = firebase.FirebaseApplication('https://smartserver.firebaseio.com')
-result = firebase.put('/', name = 'Menu', data = menu.menu_codigos)
-print(result)
-  
+		self.lista_codigos = ['000','001','002','003','004','005','006','007','008','009','010','011','012','013','014', '015']
