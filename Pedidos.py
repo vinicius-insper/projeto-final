@@ -9,8 +9,14 @@ class cPedido():
         self.cadeira = nCadeira
         
     def buscar_e_colocar_codigo_FB(self, string):
-    	for i in codigos.lista_codigos:
-    		if i == string:
-    			z = codigos.menu_codigos[string]
-    			firebase.post(url = 'mesa{0}/cadeira{1}'.format(self.mesa, self.cadeira), data = z)
+        for i in codigos.lista_codigos:
+            if i == string:
+                z = codigos.menu_codigos[string]
+                x = z.keys()
+                for e in x:
+                    x = e
+                y = z.values()
+                for e in y:
+                    y = e
+                firebase.put(url = 'mesa{0}/cadeira{1}'.format(self.mesa, self.cadeira), name = x , data = y)
 
