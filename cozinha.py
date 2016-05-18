@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 
 class gui_cozinha :
@@ -17,34 +18,53 @@ class gui_cozinha :
         self.botao1=tk.Button(window,width=4,height=5)
         self.botao1.configure(command=lambda:self.criar_botao())
         self.botao1.grid(row = 0,column = 3 )
-    
-        self.variavelcolumn=0
+        
         self.variavelrow=1
         self.pedido=0
     
     def criar_botao(self):
-        #print(self.pedido)
-        #B = str(self.pedido)
-        B = tk.Button(window,width=40,height=5,text=str(self.pedido)) 
-        B.grid(row = self.variavelrow , column = self.variavelcolumn)
-        B.configure(command = lambda:self.para_fazer(self.pedido)) 
+        t=time.localtime()
+        
+        B = tk.Button(window,width=40,height=5,text=str(self.pedido)+time.asctime(t)) 
+        B.grid(row = self.variavelrow , column =0)
+        B.configure(command = lambda:self.para_fazer(B,Bv)) 
+        
+#        self.fica_vermelho(B)
+
+        Bv = tk.Button(window,width=5,height=3,text='cancela',bg='red') 
+        Bv.grid(row = self.variavelrow , column =1)
+        Bv.configure(command = lambda:self.cancela_pedido(Bv,B)) 
+        
         self.variavelrow += 1
         self.pedido+=1
 
-        self.ativos.append(B)
-        print(self.ativos)
+        self.ativos[B]=0 
+#        time.sleep(10)
+#        B.configure(bg='red')
 
         
     
-    def para_fazer(self, i):
-        self.ativos[i].variavelcolumn+=1
-        self.ativos[i].grid(row=self.ativos[i].variavelrow, column= self.ativos[i].variavelcolumn)
-        if self.variavelcolumn >2:
-            self.ativos[i].destroy()
-            self.ativos[i].variavelcolumn=0
+    def para_fazer(self,B,Bv):
+        self.ativos[B]+=1
+        B.grid( column= self.ativos[B])
+        Bv.destroy()
+        if self.ativos[B] >2:
+            B.destroy()
+            
+    def cancela_pedido(self,Bv,B):
+        Bv.destroy()
+        B.destroy()
+        
+#    def fica_vermelho(self,B):
+#        t0=time.time()
+#        while time.time() - t0 < 2:
+#            print('ola')
+#        B.configure(bg='red')
+        
+
         
        
 window=tk.Tk()
 window.title ("Cozinha")
-gui_cozinha(window, [])
+gui_cozinha(window, {})
 window.mainloop()
