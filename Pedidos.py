@@ -8,7 +8,7 @@ class cPedido():
         self.mesa = nMesa
         self.cadeira = nCadeira
         
-    def buscar_e_colocar_codigo_FB(self, string):
+    def buscar_e_colocar_codigo_FB(self, string, hora, status, n_pedido):
         for i in codigos.lista_codigos:
             if i == string:
                 z = codigos.menu_codigos[string]
@@ -18,5 +18,5 @@ class cPedido():
                 y = z.values()
                 for e in y:
                     y = e
-                firebase.put(url = 'mesa{0}/cadeira{1}'.format(self.mesa, self.cadeira), name = x , data = y)
-
+                pedido_ = [hora, status, x, y]
+                firebase.put(url = 'mesa{0}/cadeira{1}'.format(self.mesa, self.cadeira), name = 'pedido numero {0}'.format(n_pedido), data = pedido_)
