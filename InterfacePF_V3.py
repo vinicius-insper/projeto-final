@@ -2,10 +2,11 @@ import tkinter as tk
 import time 
 from Pedidos import cPedido
 
+
 class cInicio:
     def __init__(self):
         self.window=tk.Tk()
-        self.window.title ('Inicio')
+        self.window.title ('Inicio') 
 
     def iniciar(self):
         self.frame = tk.Frame(self.window, width=500, height=500, bd=175)
@@ -162,11 +163,13 @@ class cCadeira:
         
         self.fecharmesa=tk.Button(self.tela)
         self.fecharmesa.configure(text='fechar conta mesa', width=20,height=6, bg='blue')
-        self.fecharmesa.grid(row=2,column=0)
+        self.fecharmesa.configure(command=self.fechar_conta_mesa)
+        self.fecharmesa.grid(row=3,column=0)
         
         self.fecharind=tk.Button(self.tela)
         self.fecharind.configure(text='fechar conta por pessoa', width=20,height=6, bg='red')
-        self.fecharind.grid(row=2,column=1)
+        self.fecharind.configure(command=self.fechar_conta_indiv)
+        self.fecharind.grid(row=3,column=1)
         
         self.tela.mainloop()
 
@@ -201,10 +204,12 @@ class cCadeira:
 
         self.fecharmesa=tk.Button(self.tela)
         self.fecharmesa.configure(text='fechar conta mesa', width=20,height=6, bg='blue')
+        self.fecharmesa.configure(command=self.fechar_conta_mesa)
         self.fecharmesa.grid(row=3,column=0)
         
         self.fecharind=tk.Button(self.tela)
         self.fecharind.configure(text='fechar conta por pessoa', width=20,height=6, bg='red')
+        self.fecharind.configure(command=self.fechar_conta_indiv)
         self.fecharind.grid(row=3,column=1)
 
         self.tela.mainloop()
@@ -212,7 +217,39 @@ class cCadeira:
     def callback_cadeira(self, numero):
         self.nCadeira = str(numero)
         teclado.criar_teclado()
+        
+    def fechar_conta_indiv(self):        
+        self.relatório=tk.Tk()
+        self.relatório.title('Conta')
+        
+        self.somamesa=0
+        
+        if mesa.nMesa <7:            
+            for i in range(1,5):
+                x=cPedido(mesa.nMesa,i)
+                self.conta=tk.Label(self.relatório)
+                self.conta.configure(width=100)
+                self.conta.configure(text=(x.iterar()[0]))
+                self.conta.grid(row=i) 
+                self.somamesa+=x.iterar()[1]
+        
+        else:
+            for i in range(1,7):
+                x=cPedido(mesa.nMesa,i)
+                self.conta=tk.Label(self.relatório)
+                self.conta.configure(width=100)
+                self.conta.configure(text=(x.iterar()[0]))
+                self.conta.grid(row=i) 
+                self.somamesa+=x.iterar()[1]
 
+    def fechar_conta_mesa(self):
+        self.fechar_conta_indiv()
+        self.conta=tk.Label(self.relatório)            
+        self.conta.configure(text='Total da mesa = '+'{0:.2f}'.format(self.somamesa))
+        self.conta.grid(row=8)
+        
+        self.relatório.mainloop()
+            
 class cTeclado:
     def __init__(self):
         self.n_pedido = 1
@@ -298,4 +335,3 @@ mesa = cMesa()
 cozinha = cCozinha()
 inicio = cInicio()
 inicio.iniciar()
-
