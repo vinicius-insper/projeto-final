@@ -324,7 +324,7 @@ class cTeclado:
     def ok(self):
         pedido = cPedido(mesa.nMesa, cadeira.nCadeira)
         t = time.localtime()
-        pedido.buscar_e_colocar_codigo_FB(self.string, time.asctime(t), 'a fazer', self.n_pedido)
+        pedido.buscar_e_colocar_codigo_FB(self.string, time.asctime(t), '', self.n_pedido)
         self.n_pedido += 1
         self.string='' 
         self.codigo.configure(text=self.string)
