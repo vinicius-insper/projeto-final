@@ -1,6 +1,9 @@
 import tkinter as tk
 import time 
 from Pedidos import cPedido
+from firebase import firebase
+firebase = firebase.FirebaseApplication('https://smartserver.firebaseio.com/')
+
 
 
 class cInicio:
@@ -34,49 +37,66 @@ class cCozinha:
 
         self.label1=tk.Label(self.cozinha)
         self.label1.configure(width=49,height=8, text='Para Fazer', bg='red')
-        self.label1.grid(row=0,column=0)
+        self.label1.grid(row=0,column=1)
         
         self.label2=tk.Label(self.cozinha)
         self.label2.configure(width=49,height=8, text='Fazendo', bg='yellow')
-        self.label2.grid(row=0,column=1)
+        self.label2.grid(row=0,column=2)
         
         self.label3=tk.Label(self.cozinha)
         self.label3.configure(width=49,height=8, text='Pronto', bg='green')
-        self.label3.grid(row=0,column=2)
+        self.label3.grid(row=0,column=3)
 
-        self.botao1=tk.Button(self.cozinha,width=4,height=5)
-        self.botao1.configure(command=lambda:self.criar_botao())
-        self.botao1.grid(row = 0,column = 3 )
+        self.botao1=tk.Button(self.cozinha,width=6,height=5)
+        self.botao1.configure(text='refresh')
+        self.botao1.configure(command=lambda:self.buscar_pedido())
+        self.botao1.grid(row = 0,column = 0 )
         
         self.variavelrow=1
         self.pedido=0
 
         self.cozinha.mainloop()
+        
+    def buscar_pedido(self):
+        x = firebase.get(url='/',name='')
+        for i in x.keys():
+            for j in x[i].keys():
+                for k in x[i][j]:
+                    if k != 'produto':
+                        if x[i][j][k][1] == '':
+                            self.criar_botao(x[i][j][k][2]+'\n'+i+'\n'+j,i,j,k) 
+                            firebase.put(url='/'+i+'/'+j+'/'+k,name=1,data='a fazer')
 
-    def criar_botao(self):        
-        B = tk.Button(self.cozinha,width=40,height=5,text=str(self.pedido)+'\n') 
-        B.grid(row = self.variavelrow , column =0)
-        B.configure(command = lambda:self.para_fazer(B,Bv)) 
+    def criar_botao(self, texto,mesa,cadeira,pedidon):        
+        B = tk.Button(self.cozinha,width=40,height=5,text=texto) 
+        B.grid(row = self.variavelrow , column =1) 
+        B.configure(command = lambda:self.para_fazer(B,Bv,mesa,cadeira,pedidon)) 
 
         Bv = tk.Button(self.cozinha,width=5,height=3,text='cancela',bg='red') 
-        Bv.grid(row = self.variavelrow , column =1)
-        Bv.configure(command = lambda:self.cancela_pedido(Bv,B)) 
+        Bv.grid(row = self.variavelrow , column =0)
+        Bv.configure(command = lambda:self.cancela_pedido(Bv,B,mesa,cadeira,pedidon)) 
         
         self.variavelrow += 1
         self.pedido+=1
 
-        self.ativos[B]=0 
+        self.ativos[B]=1
 
-    def para_fazer(self,B,Bv):
+    def para_fazer(self,B,Bv,mesa,cadeira,pedidon):
         self.ativos[B]+=1
         B.grid( column= self.ativos[B])
         Bv.destroy()
-        if self.ativos[B] >2:
+        if self.ativos[B]==2:
+            firebase.put(url='/'+mesa+'/'+cadeira+'/'+pedidon,name=1,data='fazendo')
+        if self.ativos[B]==3:
+            firebase.put(url='/'+mesa+'/'+cadeira+'/'+pedidon,name=1,data='feito')
+        if self.ativos[B] >3:
+            firebase.put(url='/'+mesa+'/'+cadeira+'/'+pedidon,name=1,data='entregue')
             B.destroy()
             
-    def cancela_pedido(self,Bv,B):
+    def cancela_pedido(self,Bv,B,mesa,cadeira,pedidon):
         Bv.destroy()
         B.destroy()
+        firebase.delete(url='/'+mesa+'/'+cadeira,name=pedidon)
 
 class cMesa:
     def __init__(self):
@@ -224,6 +244,12 @@ class cCadeira:
         
         self.somamesa=0
         
+        self.zerar=tk.Button(self.relatório)  
+        self.zerar.grid(column=5,row=2)
+        self.zerar.configure(text='Tem Certeza?')
+        self.zerar.configure(width=20,height=3,bg='blue')
+        self.zerar.configure(command=self.zerar_firebase)
+        
         if mesa.nMesa <7:            
             for i in range(1,5):
                 x=cPedido(mesa.nMesa,i)
@@ -250,6 +276,25 @@ class cCadeira:
         
         self.relatório.mainloop()
             
+    def zerar_firebase(self):
+        mesa1={}
+        mesa1['cadeira1']={'produto':[1,2,'produto',0]}
+        mesa1['cadeira2']={'produto':[1,2,'produto',0]}
+        mesa1['cadeira3']={'produto':[1,2,'produto',0]}
+        mesa1['cadeira4']={'produto':[1,2,'produto',0]}
+        
+        mesa2={}
+        mesa2['cadeira1']={'produto':[1,2,'produto',0]}
+        mesa2['cadeira2']={'produto':[1,2,'produto',0]}
+        mesa2['cadeira3']={'produto':[1,2,'produto',0]}
+        mesa2['cadeira4']={'produto':[1,2,'produto',0]}
+        mesa2['cadeira5']={'produto':[1,2,'produto',0]}
+        mesa2['cadeira6']={'produto':[1,2,'produto',0]}
+        if mesa.nMesa<7:
+            firebase.put(url='/', name='mesa{0}'.format(mesa.nMesa),data=mesa1)
+        else:
+            firebase.put(url='/', name='mesa{0}'.format(mesa.nMesa),data=mesa2)
+
 class cTeclado:
     def __init__(self):
         self.n_pedido = 1
