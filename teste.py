@@ -1,64 +1,63 @@
 mesa1={}
-mesa1['cadeira1']={'produto':'valor'}
-mesa1['cadeira2']={'produto':'valor'}
-mesa1['cadeira3']={'produto':'valor'}
-mesa1['cadeira4']={'produto':'valor'}
+mesa1['cadeira1']={'produto':[1,2,'produto',0]}
+mesa1['cadeira2']={'produto':[1,2,'produto',0]}
+mesa1['cadeira3']={'produto':[1,2,'produto',0]}
+mesa1['cadeira4']={'produto':[1,2,'produto',0]}
 
 mesa2={}
-mesa2['cadeira1']={'produto':'valor'}
-mesa2['cadeira2']={'produto':'valor'}
-mesa2['cadeira3']={'produto':'valor'}
-mesa2['cadeira4']={'produto':'valor'}
+mesa2['cadeira1']={'produto':[1,2,'produto',0]}
+mesa2['cadeira2']={'produto':[1,2,'produto',0]}
+mesa2['cadeira3']={'produto':[1,2,'produto',0]}
+mesa2['cadeira4']={'produto':[1,2,'produto',0]}
 
-mesa3={}
-mesa3['cadeira1']={'produto':'valor'}
-mesa3['cadeira2']={'produto':'valor'}
-mesa3['cadeira3']={'produto':'valor'}
-mesa3['cadeira4']={'produto':'valor'}
+mesa3={} 
+mesa3['cadeira1']={'produto':[1,2,'produto',0]}
+mesa3['cadeira2']={'produto':[1,2,'produto',0]}
+mesa3['cadeira3']={'produto':[1,2,'produto',0]}
+mesa3['cadeira4']={'produto':[1,2,'produto',0]}
 
 mesa4={}
-mesa4['cadeira1']={'produto':'valor'}
-mesa4['cadeira2']={'produto':'valor'}
-mesa4['cadeira3']={'produto':'valor'}
-mesa4['cadeira4']={'produto':'valor'}
+mesa4['cadeira1']={'produto':[1,2,'produto',0]}
+mesa4['cadeira2']={'produto':[1,2,'produto',0]}
+mesa4['cadeira3']={'produto':[1,2,'produto',0]}
+mesa4['cadeira4']={'produto':[1,2,'produto',0]}
 
 mesa5={}
-mesa5['cadeira1']={'produto':'valor'}
-mesa5['cadeira2']={'produto':'valor'}
-mesa5['cadeira3']={'produto':'valor'}
-mesa5['cadeira4']={'produto':'valor'}
+mesa5['cadeira1']={'produto':[1,2,'produto',0]}
+mesa5['cadeira2']={'produto':[1,2,'produto',0]}
+mesa5['cadeira3']={'produto':[1,2,'produto',0]}
+mesa5['cadeira4']={'produto':[1,2,'produto',0]}
 
 mesa6={}
-mesa6['cadeira1']={'produto':'valor'}
-mesa6['cadeira2']={'produto':'valor'}
-mesa6['cadeira3']={'produto':'valor'}
-mesa6['cadeira4']={'produto':'valor'}
-mesa6['cadeira5']={'produto':'valor'}
-mesa6['cadeira6']={'produto':'valor'}
+mesa6['cadeira1']={'produto':[1,2,'produto',0]}
+mesa6['cadeira2']={'produto':[1,2,'produto',0]}
+mesa6['cadeira3']={'produto':[1,2,'produto',0]}
+mesa6['cadeira4']={'produto':[1,2,'produto',0]}
 
 mesa7={}
-mesa7['cadeira1']={'produto':'valor'}
-mesa7['cadeira2']={'produto':'valor'}
-mesa7['cadeira3']={'produto':'valor'}
-mesa7['cadeira4']={'produto':'valor'}
-mesa7['cadeira5']={'produto':'valor'}
-mesa7['cadeira6']={'produto':'valor'}
+mesa7['cadeira1']={'produto':[1,2,'produto',0]}
+mesa7['cadeira2']={'produto':[1,2,'produto',0]}
+mesa7['cadeira3']={'produto':[1,2,'produto',0]}
+mesa7['cadeira4']={'produto':[1,2,'produto',0]}
+mesa7['cadeira5']={'produto':[1,2,'produto',0]}
+mesa7['cadeira6']={'produto':[1,2,'produto',0]}
 
 mesa8={}
-mesa8['cadeira1']={'produto':'valor'}
-mesa8['cadeira2']={'produto':'valor'}
-mesa8['cadeira3']={'produto':'valor'}
-mesa8['cadeira4']={'produto':'valor'}
-mesa8['cadeira5']={'produto':'valor'}
-mesa8['cadeira6']={'produto':'valor'}
+mesa8['cadeira1']={'produto':[1,2,'produto',0]}
+mesa8['cadeira2']={'produto':[1,2,'produto',0]}
+mesa8['cadeira3']={'produto':[1,2,'produto',0]}
+mesa8['cadeira4']={'produto':[1,2,'produto',0]}
+mesa8['cadeira5']={'produto':[1,2,'produto',0]}
+mesa8['cadeira6']={'produto':[1,2,'produto',0]}
 
 mesa9={}
-mesa9['cadeira1']={'produto':'valor'}
-mesa9['cadeira2']={'produto':'valor'}
-mesa9['cadeira3']={'produto':'valor'}
-mesa9['cadeira4']={'produto':'valor'}
-mesa9['cadeira5']={'produto':'valor'}
-mesa9['cadeira6']={'produto':'valor'}
+mesa9['cadeira1']={'produto':[1,2,'produto',0]}
+mesa9['cadeira2']={'produto':[1,2,'produto',0]}
+mesa9['cadeira3']={'produto':[1,2,'produto',0]}
+mesa9['cadeira4']={'produto':[1,2,'produto',0]}
+mesa9['cadeira5']={'produto':[1,2,'produto',0]}
+mesa9['cadeira6']={'produto':[1,2,'produto',0]}
+
 
 from firebase import firebase
 
